@@ -3,14 +3,14 @@ package me.yapoo.parser
 import io.kotest.matchers.shouldBe
 import me.yapoo.parser.core.ParseFailure
 import me.yapoo.parser.core.ParseSuccess
-import me.yapoo.parser.core.Parsers
+import me.yapoo.parser.core.string
 import org.junit.jupiter.api.Test
 
 class StringParserTest {
 
     @Test
     fun parseNonEmptyString() {
-        Parsers.string("Hello, ")("Hello, World!") shouldBe ParseSuccess(
+        string("Hello, ")("Hello, World!") shouldBe ParseSuccess(
             value = "Hello, ",
             rest = "World!"
         )
@@ -18,7 +18,7 @@ class StringParserTest {
 
     @Test
     fun parseEmptyString() {
-        Parsers.string("")("Hello, World!") shouldBe ParseSuccess(
+        string("")("Hello, World!") shouldBe ParseSuccess(
             value = "",
             rest = "Hello, World!"
         )
@@ -26,6 +26,6 @@ class StringParserTest {
 
     @Test
     fun parseFailure() {
-        Parsers.string("Hello, ")("How are you?") shouldBe ParseFailure
+        string("Hello, ")("How are you?") shouldBe ParseFailure
     }
 }

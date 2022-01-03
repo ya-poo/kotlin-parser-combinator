@@ -1,7 +1,9 @@
 package me.yapoo.parser.core
 
-import me.yapoo.parser.core.PrimitiveParsers.succeed
 import me.yapoo.parser.cons
+import me.yapoo.parser.core.PrimitiveParsers.succeed
+import me.yapoo.parser.head
+import me.yapoo.parser.tail
 
 typealias Parser<A> = (String) -> ParseResult<A>
 
@@ -82,3 +84,13 @@ fun <A, B, C> Parser<A>.zip(
             f(a, b)
         }
     }
+
+fun <A> List<Parser<A>>.any(): Parser<A> = { input ->
+    if (this.isEmpty()) ParseFailure
+    else {
+        val parser = tail.fold(head) { acc, p ->
+            acc or { p }
+        }
+        parser(input)
+    }
+}
