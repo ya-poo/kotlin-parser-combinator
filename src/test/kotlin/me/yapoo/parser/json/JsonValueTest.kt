@@ -63,6 +63,12 @@ class JsonValueTest : StringSpec({
                 rest = ""
             )
         }
+        "parse object" {
+            parser("{ \"how\" : \"are you?\"}") shouldBe ParseSuccess(
+                value = JsonObject("how" to JsonString("are you?")),
+                rest = ""
+            )
+        }
         "ignore whitespaces" {
             parser("  \"hello world   \"    ") shouldBe ParseSuccess(
                 value = JsonString("hello world   "),
