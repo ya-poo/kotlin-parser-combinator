@@ -10,6 +10,9 @@ fun signedInteger(): Parser<Int> =
 
 fun integer(): Parser<Int> = unsignedInteger() or { signedInteger() }
 
+fun negativeInteger(): Parser<Int> =
+    char('-').zip(nonZeroInteger().defer()) { _, integer -> -1 * integer }
+
 private fun nonZeroInteger(): Parser<Int> = ((digit() exclude { char('0') }) product { digit().many() })
     .map { (char, chars) ->
         (char cons chars).joinToString(separator = "").toInt()
