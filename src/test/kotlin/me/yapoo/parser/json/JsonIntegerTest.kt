@@ -42,5 +42,11 @@ class JsonIntegerTest : StringSpec({
                 rest = "abc"
             )
         }
+        "parse minus zero" {
+            parser("-0") shouldBe ParseSuccess(
+                value = JsonInteger(0),
+                rest = ""
+            )
+        }
     }
 })
