@@ -1,4 +1,4 @@
-package me.yapoo.parser
+package me.yapoo.parser.core
 
 import io.kotest.matchers.shouldBe
 import me.yapoo.parser.core.ParseFailure

@@ -1,4 +1,4 @@
-package me.yapoo.parser.advanced
+package me.yapoo.parser.arithmetic
 
 import me.yapoo.parser.core.Parser
 import me.yapoo.parser.core.char

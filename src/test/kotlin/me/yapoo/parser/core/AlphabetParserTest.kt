@@ -1,10 +1,6 @@
-package me.yapoo.parser
+package me.yapoo.parser.core
 
 import io.kotest.matchers.shouldBe
-import me.yapoo.parser.core.ParseFailure
-import me.yapoo.parser.core.ParseSuccess
-import me.yapoo.parser.core.alphabet
-import me.yapoo.parser.core.lowerAlphabet
 import org.junit.jupiter.api.Test
 
 class AlphabetParserTest {

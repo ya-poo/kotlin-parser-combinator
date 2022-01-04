@@ -1,10 +1,11 @@
 package me.yapoo.parser.core
 
+import me.yapoo.parser.core.PrimitiveParsers.anyChar
 import me.yapoo.parser.core.PrimitiveParsers.failed
 import me.yapoo.parser.core.PrimitiveParsers.succeed
 
 fun char(p: (Char) -> Boolean): Parser<Char> =
-    PrimitiveParsers.anyChar().flatMap {
+    anyChar().flatMap {
         if (p(it)) succeed(it) else failed()
     }
 

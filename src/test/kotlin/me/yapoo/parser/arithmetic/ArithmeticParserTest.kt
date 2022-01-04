@@ -1,6 +1,7 @@
-package me.yapoo.parser.advanced
+package me.yapoo.parser.arithmetic
 
 import io.kotest.matchers.shouldBe
+import me.yapoo.parser.arithmetic.arithmeticParser
 import me.yapoo.parser.core.ParseFailure
 import me.yapoo.parser.core.ParseSuccess
 import org.junit.jupiter.api.Test

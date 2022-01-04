@@ -1,4 +1,4 @@
-package me.yapoo.parser
+package me.yapoo.parser.core
 
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.should
@@ -8,10 +8,7 @@ import io.kotest.property.arbitrary.char
 import io.kotest.property.arbitrary.filter
 import io.kotest.property.arbitrary.string
 import io.kotest.property.checkAll
-import me.yapoo.parser.core.ParseFailure
-import me.yapoo.parser.core.ParseSuccess
 import me.yapoo.parser.core.PrimitiveParsers.anyChar
-import me.yapoo.parser.core.char
 
 class CharParserTest : StringSpec({
 
