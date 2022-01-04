@@ -19,5 +19,8 @@ data class JsonInteger(val get: BigInteger) : Json() {
 
 data class JsonString(val get: String) : Json()
 data class JsonBoolean(val get: Boolean) : Json()
-data class JsonArray(val get: List<Json>) : Json()
+data class JsonArray(val get: List<Json>) : Json() {
+    constructor(vararg values: Json) : this(values.toList())
+}
+
 data class JsonObject(val get: Map<String, Json>) : Json()
