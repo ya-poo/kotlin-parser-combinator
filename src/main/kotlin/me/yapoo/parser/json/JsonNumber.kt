@@ -43,7 +43,7 @@ fun jsonNumber(): Parser<JsonNumber> = run {
 
 
 fun jsonNumberFraction(): Parser<BigDecimal> =
-    char('.').zip({ digit().many() }) { _, digits ->
+    char('.').zip({ digit().many1() }) { _, digits ->
         if (digits.all { it == '0' }) BigDecimal.ZERO
         else {
             "0.${digits.joinToString(separator = "")}".toBigDecimal()
