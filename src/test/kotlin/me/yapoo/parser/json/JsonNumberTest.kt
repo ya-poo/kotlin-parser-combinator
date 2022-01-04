@@ -124,5 +124,11 @@ class JsonNumberTest : StringSpec({
                 rest = ""
             )
         }
+        "succeed with minus zero" {
+            parser("-0") shouldBe ParseSuccess(
+                value = JsonNumber(0),
+                rest = ""
+            )
+        }
     }
 })
