@@ -1,4 +1,4 @@
-package me.yapoo.parser
+package me.yapoo.parser.util
 
 val <T> List<T>.head: T
     get() = first()

@@ -1,6 +1,6 @@
 package me.yapoo.parser.core
 
-import me.yapoo.parser.cons
+import me.yapoo.parser.util.cons
 import java.math.BigInteger
 
 fun unsignedBigInteger(): Parser<BigInteger> = zeroBigInteger() or nonZeroBigInteger().defer()

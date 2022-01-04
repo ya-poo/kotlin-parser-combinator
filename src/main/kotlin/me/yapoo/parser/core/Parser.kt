@@ -3,10 +3,10 @@ package me.yapoo.parser.core
 import arrow.core.None
 import arrow.core.Option
 import arrow.core.some
-import me.yapoo.parser.cons
 import me.yapoo.parser.core.PrimitiveParsers.succeed
-import me.yapoo.parser.head
-import me.yapoo.parser.tail
+import me.yapoo.parser.util.cons
+import me.yapoo.parser.util.head
+import me.yapoo.parser.util.tail
 
 typealias Parser<A> = (String) -> ParseResult<A>
 

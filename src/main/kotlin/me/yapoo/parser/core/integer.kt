@@ -1,6 +1,6 @@
 package me.yapoo.parser.core
 
-import me.yapoo.parser.cons
+import me.yapoo.parser.util.cons
 
 fun unsignedInteger(): Parser<Int> = zeroInteger() or { nonZeroInteger() }
 
