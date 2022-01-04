@@ -1,5 +1,8 @@
 package me.yapoo.parser.core
 
+import arrow.core.None
+import arrow.core.Option
+import arrow.core.some
 import me.yapoo.parser.cons
 import me.yapoo.parser.core.PrimitiveParsers.succeed
 import me.yapoo.parser.head
@@ -49,13 +52,19 @@ fun <A> Parser<A>.many1(): Parser<List<A>> =
     }
 
 fun <A> Parser<A>.many(): Parser<List<A>> =
-    many1() or { succeed(emptyList()) }
+    many1() or succeed(emptyList<A>()).defer()
+
+fun <A> Parser<A>.defer(): () -> Parser<A> =
+    { this }
 
 fun <A, B> Parser<A>.map(
     f: (A) -> B
 ): Parser<B> = flatMap { a ->
     succeed(f(a))
 }
+
+fun <A> Parser<A>.optional(): Parser<Option<A>> =
+    map { a -> a.some() }.or(succeed(None).defer())
 
 fun <A> Parser<A>.listOfN(n: Int): Parser<List<A>> =
     if (n > 0) {
