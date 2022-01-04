@@ -1,6 +1,7 @@
 package me.yapoo.parser.json
 
 import arrow.core.Some
+import arrow.core.getOrElse
 import me.yapoo.parser.core.Parser
 import me.yapoo.parser.core.char
 import me.yapoo.parser.core.defer
@@ -8,12 +9,11 @@ import me.yapoo.parser.core.digit
 import me.yapoo.parser.core.many
 import me.yapoo.parser.core.many1
 import me.yapoo.parser.core.map
-import me.yapoo.parser.core.negativeBigInteger
+import me.yapoo.parser.core.negativeInteger
 import me.yapoo.parser.core.optional
 import me.yapoo.parser.core.or
-import me.yapoo.parser.core.unsignedBigInteger
+import me.yapoo.parser.core.unsignedInteger
 import me.yapoo.parser.core.zip
-import java.math.BigInteger
 import kotlin.math.pow
 
 // see https://www.json.org/json-ja.html
@@ -22,7 +22,7 @@ sealed class Json
 
 object JsonNull : Json()
 data class JsonNumber(val get: Double) : Json()
-data class JsonInteger(val get: BigInteger) : Json()
+data class JsonInteger(val get: Int) : Json()
 data class JsonString(val get: String) : Json()
 data class JsonBoolean(val get: Boolean) : Json()
 data class JsonArray(val get: List<Json>) : Json()
@@ -31,7 +31,20 @@ data class JsonObject(val get: Map<String, Json>) : Json()
 
 // Integer
 fun jsonInteger(): Parser<JsonInteger> =
-    (unsignedBigInteger() or { negativeBigInteger() }).map(::JsonInteger)
+    (unsignedInteger() or { negativeInteger() }).map(::JsonInteger)
+
+// Number
+fun jsonNumber(): Parser<JsonNumber> =
+    jsonInteger().zip(
+        jsonNumberFraction().optional().defer()
+    ) { integer, fraction ->
+        integer.get.toDouble() + fraction.getOrElse { 0.0 }
+    }.zip(
+        jsonNumberExponent().optional().defer()
+    ) { number, exponent ->
+        number * exponent.getOrElse { 1.0 }
+    }.map(::JsonNumber)
+
 
 fun jsonNumberFraction(): Parser<Double> =
     char('.').zip({ digit().many() }) { _, digits ->
