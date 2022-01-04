@@ -23,4 +23,6 @@ data class JsonArray(val get: List<Json>) : Json() {
     constructor(vararg values: Json) : this(values.toList())
 }
 
-data class JsonObject(val get: Map<String, Json>) : Json()
+data class JsonObject(val get: Map<String, Json>) : Json() {
+    constructor(vararg values: Pair<String, Json>) : this(values.toMap())
+}
