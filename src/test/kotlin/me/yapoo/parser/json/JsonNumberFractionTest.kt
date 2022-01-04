@@ -5,6 +5,7 @@ import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import me.yapoo.parser.core.ParseFailure
 import me.yapoo.parser.core.ParseSuccess
+import java.math.BigDecimal
 
 class JsonNumberFractionTest : StringSpec({
     "json number fraction parser" should {
@@ -12,13 +13,13 @@ class JsonNumberFractionTest : StringSpec({
 
         "succeed with valid fraction string" {
             parser(".1234") shouldBe ParseSuccess(
-                value = 0.1234,
+                value = 0.1234.toBigDecimal(),
                 rest = ""
             )
         }
         "succeed with all zero fraction" {
             parser(".0000") shouldBe ParseSuccess(
-                value = 0.0,
+                value = BigDecimal.ZERO,
                 rest = ""
             )
         }
