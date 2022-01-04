@@ -15,6 +15,6 @@ private fun jsonActualValue(): Parser<Json> =
     (jsonString()
             or jsonNumber().defer()
             or jsonBoolean().defer()
-            or jsonNull().defer())
-//            or jsonArray().defer())
+            or jsonNull().defer()
+            or jsonArray().defer())
 //            or jsonObject().defer())

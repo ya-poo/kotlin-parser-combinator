@@ -44,6 +44,25 @@ class JsonValueTest : StringSpec({
                 rest = ""
             )
         }
+        "parse array" {
+            parser("[   3,   true, [1, [2, null, [3]]]]") shouldBe ParseSuccess(
+                value = JsonArray(
+                    JsonNumber(3),
+                    JsonBoolean(true),
+                    JsonArray(
+                        JsonNumber(1),
+                        JsonArray(
+                            JsonNumber(2),
+                            JsonNull,
+                            JsonArray(
+                                JsonNumber(3)
+                            )
+                        )
+                    )
+                ),
+                rest = ""
+            )
+        }
         "ignore whitespaces" {
             parser("  \"hello world   \"    ") shouldBe ParseSuccess(
                 value = JsonString("hello world   "),
